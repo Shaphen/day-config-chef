@@ -1,4 +1,4 @@
-name: Daily Comment Update
+name: Config Update
 
 on:
   schedule:
@@ -13,18 +13,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.x'
+          node-version: '18'  # or '20' as needed
 
       - name: Run update script
-        run: python update_comment.py
+        run: node update-config.js
 
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add daily_comment.txt
-          git commit -m "Daily comment update"
+          git commit -m "config update"
           git push

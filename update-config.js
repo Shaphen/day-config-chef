@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // File to update
-const filename = path.join(__dirname, 'daily_comment.txt');
+const filename = path.join(__dirname, 'day_config.txt');
 
 // Get today's date in YYYY-MM-DD format
 const today = new Date().toISOString().split('T')[0];
@@ -11,11 +11,10 @@ const today = new Date().toISOString().split('T')[0];
 let lines = fs.readFileSync(filename, 'utf-8').split('\n');
 
 // Update the first line if it starts with the expected prefix
-if (lines[0].startsWith('# Daily update:')) {
-  lines[0] = `# Daily update: ${today}`;
+if (lines[0].startsWith('# updated:')) {
+    console.log("Updated");
+  lines[0] = `# updated: ${today}`;
 }
 
 // Write the updated content back to the file
 fs.writeFileSync(filename, lines.join('\n'), 'utf-8');
-
-console.log(`Updated comment date to ${today}`);
